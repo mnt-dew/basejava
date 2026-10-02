@@ -9,12 +9,20 @@ public class ArrayStorage {
     int size = 0;
 
     void clear() {
-        for(int i = 0; i < size; i++) storage[i] = null;
+        for (int i = 0; i < size; i++) storage[i] = null;
         size = 0;
     }
 
     void save(Resume r) {
         boolean contain = false;
+
+//            The program does not guard against `resume.uuid` being `null`;
+//            every UUID must be unique and non-null.
+//            While the idea was to handle this on the `mainarray` side,
+//            the `storage` component could also take responsibility for this check.
+
+        if (size == storage.length-1) return;
+
         if (r.uuid == null) {
             r.uuid = UUID.randomUUID().toString();
         } else {
@@ -36,8 +44,8 @@ public class ArrayStorage {
     }
 
     void delete(String uuid) {
-        for(int i = 0; i < size; i++) {
-            if(storage[i].uuid.equals(uuid)) {
+        for (int i = 0; i < size; i++) {
+            if (storage[i].uuid.equals(uuid)) {
                 storage[i] = storage[size - 1];
                 storage[size - 1] = null;
                 size -= 1;
