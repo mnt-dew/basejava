@@ -35,8 +35,8 @@ public class ArrayStorage {
             System.out.println("Вы не указали uuid, поэтому для данного резюме был присвоен уникальный uuid: " + r.uuid);
         }
         if (storageContainUUID(storage, r.uuid) != -1) {
-            storage[size++] = r;
-        } else System.out.println("Резюме с таким uuid уже существует!");
+            System.out.println("Резюме с таким uuid уже существует!");
+        } else storage[size++] = r;
     }
 
     Resume get(String uuid) {
