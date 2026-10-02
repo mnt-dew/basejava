@@ -18,24 +18,28 @@ public class ArrayStorage {
     }
 
     void clear() {
-        for (int i = 0; i < size; i++) storage[i] = null;
+        for (int i = 0; i < size; i++) {
+            storage[i] = null;
+        }
         size = 0;
     }
 
-    void save(Resume r) {
+    void save(Resume resume) {
         if (size == storage.length) {
             System.out.println("Хранилище резюме заполнено!");
             return;
         }
 
-        // Присвает уникальный uuid, если пользователь не указал свой uuid
-        if (r.uuid == null) {
-            r.uuid = UUID.randomUUID().toString();
-            System.out.println("Вы не указали uuid, поэтому для данного резюме был присвоен уникальный uuid: " + r.uuid);
+        // Присваивает уникальный uuid, если пользователь не указал свой uuid
+        if (resume.uuid == null) {
+            resume.uuid = UUID.randomUUID().toString();
+            System.out.println("Вы не указали uuid, поэтому для данного резюме был присвоен уникальный uuid: " + resume.uuid);
         }
-        if (indexOfUUID(r.uuid) != -1) {
+        if (indexOfUUID(resume.uuid) != -1) {
             System.out.println("Резюме с таким uuid уже существует!");
-        } else storage[size++] = r;
+        } else {
+            storage[size++] = resume;
+        }
     }
 
     Resume get(String uuid) {
