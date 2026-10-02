@@ -8,7 +8,7 @@ public class ArrayStorage {
     Resume[] storage = new Resume[10000];
     int size = 0;
 
-    private int storageContainUUID(Resume[] storage, String uuid) {
+    private int indexOfUUID(String uuid) {
         for (int i = 0; i < size; i++) {
             if (storage[i].uuid.equals(uuid)) {
                 return i;
@@ -34,13 +34,13 @@ public class ArrayStorage {
             r.uuid = UUID.randomUUID().toString();
             System.out.println("Вы не указали uuid, поэтому для данного резюме был присвоен уникальный uuid: " + r.uuid);
         }
-        if (storageContainUUID(storage, r.uuid) != -1) {
+        if (indexOfUUID(r.uuid) != -1) {
             System.out.println("Резюме с таким uuid уже существует!");
         } else storage[size++] = r;
     }
 
     Resume get(String uuid) {
-        int index = storageContainUUID(storage, uuid);
+        int index = indexOfUUID(uuid);
         if (index != -1) {
             return storage[index];
         }
@@ -48,7 +48,7 @@ public class ArrayStorage {
     }
 
     void delete(String uuid) {
-        int index = storageContainUUID(storage, uuid);
+        int index = indexOfUUID(uuid);
         if (index != -1) {
             storage[index] = storage[size - 1];
             storage[size - 1] = null;
