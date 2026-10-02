@@ -16,15 +16,12 @@ public class ArrayStorage {
     void save(Resume r) {
         boolean contain = false;
 
-//            The program does not guard against `resume.uuid` being `null`;
-//            every UUID must be unique and non-null.
-//            While the idea was to handle this on the `mainarray` side,
-//            the `storage` component could also take responsibility for this check.
-
         if (size == storage.length) {
             System.out.println("Хранилище резюме заполнено!");
             return;
         }
+
+        // Присвает уникальный uuid, если пользователь не указал свой uuid
 
         if (r.uuid == null) {
             r.uuid = UUID.randomUUID().toString();
