@@ -29,7 +29,6 @@ public class ArrayStorage {
         }
 
         // Присвает уникальный uuid, если пользователь не указал свой uuid
-
         if (r.uuid == null) {
             r.uuid = UUID.randomUUID().toString();
             System.out.println("Вы не указали uuid, поэтому для данного резюме был присвоен уникальный uuid: " + r.uuid);
