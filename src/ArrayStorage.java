@@ -8,14 +8,21 @@ public class ArrayStorage {
     Resume[] storage = new Resume[10000];
     int size = 0;
 
+    private int storageContainUUID(Resume[] storage, String uuid) {
+        for (int i = 0; i < size; i++) {
+            if (storage[i].uuid.equals(uuid)) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
     void clear() {
         for (int i = 0; i < size; i++) storage[i] = null;
         size = 0;
     }
 
     void save(Resume r) {
-        boolean contain = false;
-
         if (size == storage.length) {
             System.out.println("Хранилище резюме заполнено!");
             return;
@@ -26,33 +33,26 @@ public class ArrayStorage {
         if (r.uuid == null) {
             r.uuid = UUID.randomUUID().toString();
             System.out.println("Вы не указали uuid, поэтому для данного резюме был присвоен уникальный uuid: " + r.uuid);
-        } else {
-            for (int i = 0; i < size; i++) {
-                if (storage[i].uuid.equals(r.uuid)) {
-                    contain = true;
-                    System.out.println("Резюме с таким uuid уже существует, поэтому резюме не было добавлено!");
-                    break;
-                }
-            }
         }
-        if (!contain) storage[size++] = r;
+        if (storageContainUUID(storage, r.uuid) != -1) {
+            storage[size++] = r;
+        } else System.out.println("Резюме с таким uuid уже существует!");
     }
 
     Resume get(String uuid) {
-        for (int i = 0; i < size; i++) {
-            if (storage[i].uuid.equals(uuid)) return storage[i];
+        int index = storageContainUUID(storage, uuid);
+        if (index != -1) {
+            return storage[index];
         }
         return null;
     }
 
     void delete(String uuid) {
-        for (int i = 0; i < size; i++) {
-            if (storage[i].uuid.equals(uuid)) {
-                storage[i] = storage[size - 1];
-                storage[size - 1] = null;
-                size -= 1;
-                break;
-            }
+        int index = storageContainUUID(storage, uuid);
+        if (index != -1) {
+            storage[index] = storage[size - 1];
+            storage[size - 1] = null;
+            size -= 1;
         }
     }
 
