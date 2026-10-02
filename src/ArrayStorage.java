@@ -21,14 +21,19 @@ public class ArrayStorage {
 //            While the idea was to handle this on the `mainarray` side,
 //            the `storage` component could also take responsibility for this check.
 
-        if (size == storage.length-1) return;
+        if (size == storage.length) {
+            System.out.println("Хранилище резюме заполнено!");
+            return;
+        }
 
         if (r.uuid == null) {
             r.uuid = UUID.randomUUID().toString();
+            System.out.println("Вы не указали uuid, поэтому для данного резюме был присвоен уникальный uuid: " + r.uuid);
         } else {
             for (int i = 0; i < size; i++) {
                 if (storage[i].uuid.equals(r.uuid)) {
                     contain = true;
+                    System.out.println("Резюме с таким uuid уже существует, поэтому резюме не было добавлено!");
                     break;
                 }
             }
