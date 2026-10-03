@@ -20,12 +20,6 @@ public class ArrayStorage {
             System.out.println("Хранилище резюме заполнено!");
             return;
         }
-
-        // Присваивает уникальный uuid, если пользователь не указал свой uuid
-        if (resume.uuid == null) {
-            resume.uuid = UUID.randomUUID().toString();
-            System.out.println("Вы не указали uuid, поэтому для данного резюме был присвоен уникальный uuid: " + resume.uuid);
-        }
         if (indexOfUUID(resume.uuid) != -1) {
             System.out.println("Резюме с таким uuid уже существует!");
         } else {
