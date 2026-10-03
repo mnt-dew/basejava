@@ -1,5 +1,4 @@
 import java.util.Arrays;
-import java.util.UUID;
 
 /**
  * Array based storage for Resumes
@@ -49,6 +48,7 @@ public class ArrayStorage {
         }
         return -1;
     }
+
     /**
      * @return array, contains only Resumes in storage (without null)
      */

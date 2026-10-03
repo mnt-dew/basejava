@@ -1,5 +1,3 @@
-import java.util.UUID;
-
 /**
  * Initial resume class
  */
@@ -8,7 +6,8 @@ public class Resume {
     // Unique identifier
     String uuid;
 
-    Resume() {}
+    Resume() {
+    }
 
     Resume(String uuid) {
         if (uuid == null || uuid.isBlank()) {
@@ -17,6 +16,7 @@ public class Resume {
             this.uuid = uuid;
         }
     }
+
     @Override
     public String toString() {
         return uuid;
