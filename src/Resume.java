@@ -10,11 +10,8 @@ public class Resume {
     }
 
     Resume(String uuid) {
-        if (uuid == null || uuid.isBlank()) {
-            System.out.println("Введён некорректный uuid!");
-        } else {
-            this.uuid = uuid;
-        }
+        if (uuid == null || uuid.isBlank()) throw new IllegalArgumentException("Введён некорректный uuid!");
+        this.uuid = uuid;
     }
 
     @Override
