@@ -55,7 +55,7 @@ public class ArrayStorage {
         if (index != -1) {
             storage[index] = storage[size - 1];
             storage[size - 1] = null;
-            size -= 1;
+            size--;
         }
     }
 
