@@ -44,10 +44,7 @@ public class ArrayStorage {
 
     Resume get(String uuid) {
         int index = indexOfUUID(uuid);
-        if (index != -1) {
-            return storage[index];
-        }
-        return null;
+        return indexOfUUID(uuid) != -1 ? storage[index] : null;
     }
 
     void delete(String uuid) {
