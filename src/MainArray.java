@@ -31,8 +31,12 @@ public class MainArray {
                     System.out.println(ARRAY_STORAGE.size());
                     break;
                 case "save":
-                    r = new Resume(uuid);
-                    if (r.uuid != null) ARRAY_STORAGE.save(r);
+                    try {
+                        r = new Resume(uuid);
+                        ARRAY_STORAGE.save(r);
+                    } catch (IllegalArgumentException e) {
+                        System.out.println(e.getMessage());
+                    }
                     printAll();
                     break;
                 case "delete":
