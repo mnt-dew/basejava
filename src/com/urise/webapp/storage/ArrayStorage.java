@@ -41,7 +41,7 @@ public class ArrayStorage {
         if (idx != -1) {
             return storage[idx];
         }
-        throw new Exception("Резюме c uuid: " + uuid + " уже существует!");
+        throw new Exception("Резюме c uuid: " + uuid + " не существует!");
     }
 
     public void delete(String uuid) throws Exception {
@@ -51,7 +51,7 @@ public class ArrayStorage {
             storage[size - 1] = null;
             size--;
         } else {
-            throw new Exception("Резюме c uuid: " + uuid + " уже существует!");
+            throw new Exception("Резюме c uuid: " + uuid + " не существует!");
         }
     }
 
