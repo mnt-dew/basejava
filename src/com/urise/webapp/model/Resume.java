@@ -1,16 +1,26 @@
+package com.urise.webapp.model;
+
 /**
  * Initial resume class
  */
 public class Resume {
 
     // Unique identifier
-    String uuid;
+    private String uuid;
 
-    Resume() {
+    public Resume() {
     }
 
-    Resume(String uuid) {
+    public Resume(String uuid) {
         if (uuid == null || uuid.isBlank()) throw new IllegalArgumentException("Введён некорректный uuid!");
+        this.uuid = uuid;
+    }
+
+    public String getUuid() {
+        return uuid;
+    }
+
+    public void setUuid(String uuid) {
         this.uuid = uuid;
     }
 

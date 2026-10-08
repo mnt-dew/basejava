@@ -1,37 +1,41 @@
+package com.urise.webapp.storage;
+
+import com.urise.webapp.model.Resume;
+
 import java.util.Arrays;
 
 /**
  * Array based storage for Resumes
  */
 public class ArrayStorage {
-    Resume[] storage = new Resume[10000];
-    int size = 0;
+    private Resume[] storage = new Resume[10000];
+    private int size = 0;
 
-    void clear() {
+    public void clear() {
         for (int idx = 0; idx < size; idx++) {
             storage[idx] = null;
         }
         size = 0;
     }
 
-    void save(Resume resume) {
+    public void save(Resume resume) {
         if (size == storage.length) {
             System.out.println("Хранилище резюме заполнено!");
             return;
         }
-        if (indexOfUUID(resume.uuid) != -1) {
+        if (indexOfUUID(resume.getUuid()) != -1) {
             System.out.println("Резюме с таким uuid уже существует!");
         } else {
             storage[size++] = resume;
         }
     }
 
-    Resume get(String uuid) {
+    public Resume get(String uuid) {
         int idx = indexOfUUID(uuid);
         return idx != -1 ? storage[idx] : null;
     }
 
-    void delete(String uuid) {
+    public void delete(String uuid) {
         int idx = indexOfUUID(uuid);
         if (idx != -1) {
             storage[idx] = storage[size - 1];
@@ -42,7 +46,7 @@ public class ArrayStorage {
 
     private int indexOfUUID(String uuid) {
         for (int idx = 0; idx < size; idx++) {
-            if (storage[idx].uuid.equals(uuid)) {
+            if (storage[idx].getUuid().equals(uuid)) {
                 return idx;
             }
         }
@@ -52,11 +56,11 @@ public class ArrayStorage {
     /**
      * @return array, contains only Resumes in storage (without null)
      */
-    Resume[] getAll() {
+    public Resume[] getAll() {
         return Arrays.copyOf(storage, size);
     }
 
-    int size() {
+    public int size() {
         return size;
     }
 }
