@@ -18,6 +18,15 @@ public class ArrayStorage {
         size = 0;
     }
 
+    public void update(Resume resume) throws Exception {
+        int idx = indexOfUUID(resume.getUuid());
+        if (idx != -1) {
+            storage[idx] = new Resume(resume.getUuid());
+        } else {
+            throw new Exception("Такого резюме не существует!");
+        }
+    }
+
     public void save(Resume resume) {
         if (size == storage.length) {
             System.out.println("Хранилище резюме заполнено!");
