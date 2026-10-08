@@ -27,29 +27,33 @@ public class ArrayStorage {
         }
     }
 
-    public void save(Resume resume) {
+    public void save(Resume resume) throws Exception {
         if (size == storage.length) {
-            System.out.println("Хранилище резюме заполнено!");
-            return;
+            throw new Exception("Хранилище резюме заполнено!");
         }
         if (indexOfUUID(resume.getUuid()) != -1) {
-            System.out.println("Резюме с таким uuid уже существует!");
+            throw new Exception("Резюме с таким uuid уже существует!");
         } else {
             storage[size++] = resume;
         }
     }
 
-    public Resume get(String uuid) {
+    public Resume get(String uuid) throws Exception {
         int idx = indexOfUUID(uuid);
-        return idx != -1 ? storage[idx] : null;
+        if (idx != -1) {
+            return storage[idx];
+        }
+        throw new Exception("Резюме с таким uuid не существует!");
     }
 
-    public void delete(String uuid) {
+    public void delete(String uuid) throws Exception {
         int idx = indexOfUUID(uuid);
         if (idx != -1) {
             storage[idx] = storage[size - 1];
             storage[size - 1] = null;
             size--;
+        } else {
+            throw new Exception("Резюме с таким uuid не существует!");
         }
     }
 
