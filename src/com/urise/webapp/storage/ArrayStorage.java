@@ -8,7 +8,7 @@ import java.util.Arrays;
  * Array based storage for Resumes
  */
 public class ArrayStorage {
-    private final Resume[] storage = new Resume[2];
+    private final Resume[] storage = new Resume[10000];
     private int size = 0;
 
     public void clear() {
