@@ -8,7 +8,7 @@ import java.util.Arrays;
  * Array based storage for Resumes
  */
 public class ArrayStorage {
-    private Resume[] storage = new Resume[10000];
+    private final Resume[] storage = new Resume[10000];
     private int size = 0;
 
     public void clear() {
@@ -21,16 +21,16 @@ public class ArrayStorage {
         if (idx != -1) {
             storage[idx] = new Resume(resume.getUuid());
         } else {
-            throw new Exception("Такого резюме не существует!");
+            errorMessage("Такого резюме не существует!");
         }
     }
 
     public void save(Resume resume) throws Exception {
         if (size == storage.length) {
-            throw new Exception("Хранилище резюме заполнено!");
+            errorMessage("Хранилище резюме заполнено!");
         }
         if (indexOfUUID(resume.getUuid()) != -1) {
-            throw new Exception("Резюме c uuid: " + resume.getUuid() + " уже существует!");
+            errorMessage("Резюме c uuid: " + resume.getUuid() + " уже существует!");
         } else {
             storage[size++] = resume;
         }
@@ -41,7 +41,7 @@ public class ArrayStorage {
         if (idx != -1) {
             return storage[idx];
         }
-        throw new Exception("Резюме c uuid: " + uuid + " не существует!");
+        errorMessage("Резюме c uuid: " + uuid + " не существует!");
     }
 
     public void delete(String uuid) throws Exception {
@@ -51,8 +51,12 @@ public class ArrayStorage {
             storage[size - 1] = null;
             size--;
         } else {
-            throw new Exception("Резюме c uuid: " + uuid + " не существует!");
+            errorMessage("Резюме c uuid: " + uuid + " не существует!");
         }
+    }
+
+    private void errorMessage(String msg) {
+        System.out.println(msg);
     }
 
     private int indexOfUUID(String uuid) {
