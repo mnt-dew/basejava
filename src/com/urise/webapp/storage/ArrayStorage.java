@@ -16,7 +16,7 @@ public class ArrayStorage {
         size = 0;
     }
 
-    public void update(Resume resume) throws Exception {
+    public void update(Resume resume) {
         int idx = indexOfUUID(resume.getUuid());
         if (idx != -1) {
             storage[idx] = new Resume(resume.getUuid());
@@ -25,7 +25,7 @@ public class ArrayStorage {
         }
     }
 
-    public void save(Resume resume) throws Exception {
+    public void save(Resume resume) {
         if (size == storage.length) {
             errorMessage("Хранилище резюме заполнено!");
         }
@@ -36,15 +36,16 @@ public class ArrayStorage {
         }
     }
 
-    public Resume get(String uuid) throws Exception {
+    public Resume get(String uuid) {
         int idx = indexOfUUID(uuid);
         if (idx != -1) {
             return storage[idx];
         }
         errorMessage("Резюме c uuid: " + uuid + " не существует!");
+        return null;
     }
 
-    public void delete(String uuid) throws Exception {
+    public void delete(String uuid) {
         int idx = indexOfUUID(uuid);
         if (idx != -1) {
             storage[idx] = storage[size - 1];
