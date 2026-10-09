@@ -26,16 +26,16 @@ public class MainTestArrayStorage {
 
         System.out.println("Get dummy: " + ARRAY_STORAGE.get("dummy"));
 
+        System.out.println("Update resume r3 with uuid: " + r3.getUuid());
+        ARRAY_STORAGE.update(r3);
         printAll();
+
         ARRAY_STORAGE.delete(r1.getUuid());
         printAll();
         ARRAY_STORAGE.clear();
         printAll();
 
         System.out.println("Size: " + ARRAY_STORAGE.size());
-
-        System.out.println("Update resume r3 with uuid: " + r3.getUuid());
-        ARRAY_STORAGE.update(r3);
     }
 
     static void printAll() {
