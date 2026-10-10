@@ -28,14 +28,13 @@ public class ArrayStorage {
     public void save(Resume resume) {
         if (size == storage.length) {
             errorMessage("Хранилище резюме заполнено!");
-        } else {
-            if (indexOfUUID(resume.getUuid()) != -1) {
-                errorMessage("Резюме c uuid: " + resume.getUuid() + " уже существует!");
-            } else {
-                storage[size++] = resume;
-            }
+            return;
         }
-
+        if (indexOfUUID(resume.getUuid()) != -1) {
+            errorMessage("Резюме c uuid: " + resume.getUuid() + " уже существует!");
+            return;
+        }
+        storage[size++] = resume;
     }
 
     public Resume get(String uuid) {
