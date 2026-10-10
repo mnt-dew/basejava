@@ -21,7 +21,7 @@ public class ArrayStorage {
         if (idx != -1) {
             storage[idx] = new Resume(resume.getUuid());
         } else {
-            errorMessage("Такого резюме не существует!");
+            errorMessage("Резюме с uuid: " + resume.getUuid() + " в хранилище не существует!");
         }
     }
 
