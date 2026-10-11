@@ -17,7 +17,7 @@ public class ArrayStorage {
     }
 
     public void update(Resume resume) {
-        int idx = indexOfUUID(resume.getUuid());
+        int idx = indexOfUuid(resume.getUuid());
         if (idx != -1) {
             storage[idx] = new Resume(resume.getUuid());
         } else {
@@ -30,7 +30,7 @@ public class ArrayStorage {
             errorMessage("Хранилище резюме заполнено!");
             return;
         }
-        if (indexOfUUID(resume.getUuid()) != -1) {
+        if (indexOfUuid(resume.getUuid()) != -1) {
             errorMessage("Резюме c uuid: " + resume.getUuid() + " уже существует!");
             return;
         }
@@ -38,7 +38,7 @@ public class ArrayStorage {
     }
 
     public Resume get(String uuid) {
-        int idx = indexOfUUID(uuid);
+        int idx = indexOfUuid(uuid);
         if (idx != -1) {
             return storage[idx];
         }
@@ -47,7 +47,7 @@ public class ArrayStorage {
     }
 
     public void delete(String uuid) {
-        int idx = indexOfUUID(uuid);
+        int idx = indexOfUuid(uuid);
         if (idx != -1) {
             storage[idx] = storage[size - 1];
             storage[size - 1] = null;
@@ -61,7 +61,7 @@ public class ArrayStorage {
         System.out.println(msg);
     }
 
-    private int indexOfUUID(String uuid) {
+    private int indexOfUuid(String uuid) {
         for (int idx = 0; idx < size; idx++) {
             if (storage[idx].getUuid().equals(uuid)) {
                 return idx;
