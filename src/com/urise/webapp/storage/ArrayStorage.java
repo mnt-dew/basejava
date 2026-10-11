@@ -19,7 +19,7 @@ public class ArrayStorage {
     public void update(Resume resume) {
         int idx = indexOfUuid(resume.getUuid());
         if (idx != -1) {
-            storage[idx] = new Resume(resume.getUuid());
+            storage[idx] = resume;
         } else {
             errorMessage("Резюме с uuid: " + resume.getUuid() + " в хранилище не существует!");
         }
