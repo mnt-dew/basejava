@@ -18,7 +18,7 @@ public class ArrayStorage {
 
     public void update(Resume resume) {
         int idx = indexOfUuid(resume.getUuid());
-        if (idx != -1) {
+        if (idx >= 0) {
             storage[idx] = resume;
         } else {
             errorMessage("Резюме с uuid: " + resume.getUuid() + " в хранилище не существует!");
@@ -39,7 +39,7 @@ public class ArrayStorage {
 
     public Resume get(String uuid) {
         int idx = indexOfUuid(uuid);
-        if (idx != -1) {
+        if (idx >= 0) {
             return storage[idx];
         }
         errorMessage("Резюме c uuid: " + uuid + " не существует!");
@@ -48,10 +48,10 @@ public class ArrayStorage {
 
     public void delete(String uuid) {
         int idx = indexOfUuid(uuid);
-        if (idx != -1) {
-            storage[idx] = storage[size - 1];
-            storage[size - 1] = null;
+        if (idx >= 0) {
             size--;
+            storage[idx] = storage[size];
+            storage[size] = null;
         } else {
             errorMessage("Резюме c uuid: " + uuid + " не существует!");
         }
