@@ -42,6 +42,15 @@ public abstract class AbstractArrayStorage implements Storage {
         size++;
     }
 
+    public Resume get(String uuid) {
+        int idx = indexOfUuid(uuid);
+        if (idx >= 0) {
+            return storage[idx];
+        }
+        errorResumeNotFound(uuid);
+        return null;
+    }
+
     public void delete(String uuid) {
         int idx = indexOfUuid(uuid);
 
@@ -58,17 +67,12 @@ public abstract class AbstractArrayStorage implements Storage {
         return size;
     }
 
-    public Resume get(String uuid) {
-        int idx = indexOfUuid(uuid);
-        if (idx >= 0) {
-            return storage[idx];
-        }
-        errorResumeNotFound(uuid);
-        return null;
-    }
-
     private void errorResumeNotFound(String uuid) {
         System.out.println("Резюме c uuid: " + uuid + " не существует!");
+    }
+
+    public Resume[] getAll() {
+        return Arrays.copyOf(storage, size);
     }
 
     protected abstract int indexOfUuid(String uuid);
@@ -77,7 +81,5 @@ public abstract class AbstractArrayStorage implements Storage {
 
     protected abstract void deleteElementFromStorage(int idx);
 
-    public Resume[] getAll() {
-        return Arrays.copyOf(storage, size);
-    }
+
 }
