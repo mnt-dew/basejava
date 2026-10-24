@@ -22,6 +22,5 @@ public class SortedArrayStorage extends AbstractArrayStorage {
     @Override
     protected void deleteElementFromStorage(int idx) {
         System.arraycopy(storage, idx + 1, storage, idx, size - (idx + 1));
-        storage[size - 1] = null;
     }
 }

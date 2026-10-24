@@ -24,6 +24,5 @@ public class ArrayStorage extends AbstractArrayStorage {
     @Override
     protected void deleteElementFromStorage(int idx) {
         storage[idx] = storage[size - 1];
-        storage[size - 1] = null;
     }
 }
