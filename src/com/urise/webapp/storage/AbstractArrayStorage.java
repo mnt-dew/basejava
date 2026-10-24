@@ -1,5 +1,8 @@
 package com.urise.webapp.storage;
 
+import com.urise.webapp.exception.ExistStorageException;
+import com.urise.webapp.exception.NotExistStorageException;
+import com.urise.webapp.exception.StorageException;
 import com.urise.webapp.model.Resume;
 
 import java.util.Arrays;
@@ -17,26 +20,17 @@ public abstract class AbstractArrayStorage implements Storage {
     public void update(Resume resume) {
         int idx = indexOfUuid(resume.getUuid());
 
-        if (idx < 0) {
-            errorResumeNotFound(resume.getUuid());
-            return;
-        }
+        if (idx < 0) throw new NotExistStorageException(resume.getUuid());
 
         storage[idx] = resume;
     }
 
     public void save(Resume resume) {
-        if (size == STORAGE_LIMIT) {
-            System.out.println("Хранилище резюме заполнено!");
-            return;
-        }
+        if (size == STORAGE_LIMIT) throw new StorageException("Хранилище переполнено!", resume.getUuid());
 
         int idx = indexOfUuid(resume.getUuid());
 
-        if (idx >= 0) {
-            System.out.println("Резюме с uuid: " + resume.getUuid() + " уже существует!");
-            return;
-        }
+        if (idx >= 0) throw new ExistStorageException(resume.getUuid());
 
         insertResumeInStorage(resume, idx);
         size++;
@@ -47,17 +41,13 @@ public abstract class AbstractArrayStorage implements Storage {
         if (idx >= 0) {
             return storage[idx];
         }
-        errorResumeNotFound(uuid);
-        return null;
+        throw new NotExistStorageException(uuid);
     }
 
     public void delete(String uuid) {
         int idx = indexOfUuid(uuid);
 
-        if (idx < 0) {
-            errorResumeNotFound(uuid);
-            return;
-        }
+        if (idx < 0) throw new NotExistStorageException(uuid);
 
         deleteElementFromStorage(idx);
         storage[size - 1] = null;
@@ -66,10 +56,6 @@ public abstract class AbstractArrayStorage implements Storage {
 
     public int size() {
         return size;
-    }
-
-    private void errorResumeNotFound(String uuid) {
-        System.out.println("Резюме c uuid: " + uuid + " не существует!");
     }
 
     public Resume[] getAll() {
