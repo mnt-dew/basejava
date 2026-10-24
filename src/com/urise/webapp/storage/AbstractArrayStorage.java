@@ -38,7 +38,7 @@ public abstract class AbstractArrayStorage implements Storage {
             return;
         }
 
-        insertElementInStorage(resume, idx);
+        insertResumeInStorage(resume, idx);
         size++;
     }
 
@@ -73,7 +73,7 @@ public abstract class AbstractArrayStorage implements Storage {
 
     protected abstract int indexOfUuid(String uuid);
 
-    protected abstract void insertElementInStorage(Resume resume, int idx);
+    protected abstract void insertResumeInStorage(Resume resume, int idx);
 
     protected abstract void deleteElementFromStorage(int idx);
 
