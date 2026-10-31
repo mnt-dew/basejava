@@ -20,17 +20,25 @@ public abstract class AbstractArrayStorage implements Storage {
     public void update(Resume resume) {
         int idx = indexOfUuid(resume.getUuid());
 
-        if (idx < 0) throw new NotExistStorageException(resume.getUuid());
+        if (idx < 0) {
+            throw new NotExistStorageException(resume.getUuid());
+        }
 
         storage[idx] = resume;
     }
 
     public void save(Resume resume) {
-        if (size == STORAGE_LIMIT) throw new StorageException("Хранилище переполнено!", resume.getUuid());
+        String uuid = resume.getUuid();
 
-        int idx = indexOfUuid(resume.getUuid());
+        if (size == STORAGE_LIMIT) {
+            throw new StorageException("Хранилище переполнено!", uuid);
+        }
 
-        if (idx >= 0) throw new ExistStorageException(resume.getUuid());
+        int idx = indexOfUuid(uuid);
+
+        if (idx >= 0) {
+            throw new ExistStorageException(uuid);
+        }
 
         insertResumeInStorage(resume, idx);
         size++;
@@ -38,16 +46,20 @@ public abstract class AbstractArrayStorage implements Storage {
 
     public Resume get(String uuid) {
         int idx = indexOfUuid(uuid);
-        if (idx >= 0) {
-            return storage[idx];
+
+        if (idx < 0) {
+            throw new NotExistStorageException(uuid);
         }
-        throw new NotExistStorageException(uuid);
+
+        return storage[idx];
     }
 
     public void delete(String uuid) {
         int idx = indexOfUuid(uuid);
 
-        if (idx < 0) throw new NotExistStorageException(uuid);
+        if (idx < 0) {
+            throw new NotExistStorageException(uuid);
+        }
 
         deleteElementFromStorage(idx);
         storage[size - 1] = null;
