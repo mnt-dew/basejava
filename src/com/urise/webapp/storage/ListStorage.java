@@ -15,6 +15,16 @@ public class ListStorage extends AbstractStorage {
     }
 
     @Override
+    public Resume[] getAll() {
+        return storage.toArray(new Resume[0]);
+    }
+
+    @Override
+    public int size() {
+        return storage.size();
+    }
+
+    @Override
     protected int indexOfUuid(String uuid) {
         ListIterator<Resume> storageIterator = storage.listIterator();
         while (storageIterator.hasNext()) {
@@ -38,22 +48,12 @@ public class ListStorage extends AbstractStorage {
     }
 
     @Override
-    protected void deleteResumeFromStorage(int idx) {
-        storage.remove(idx);
-    }
-
-    @Override
     protected Resume getResumeByIndex(int idx) {
         return storage.get(idx);
     }
 
     @Override
-    public Resume[] getAll() {
-        return storage.toArray(new Resume[0]);
-    }
-
-    @Override
-    public int size() {
-        return storage.size();
+    protected void deleteResumeFromStorage(int idx) {
+        storage.remove(idx);
     }
 }
